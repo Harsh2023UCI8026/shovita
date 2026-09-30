@@ -1,182 +1,207 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Particle Canvas Drift (Sparkles & Stars)
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Add a light drift of warm, hand-drawn sparkles behind the scrapbook.
   const canvas = document.getElementById('sparkle-canvas');
-  if (canvas) {
+  if (canvas && !reduceMotion) {
     const ctx = canvas.getContext('2d');
-    let particles = [];
-    const particleCount = 45;
+    if (ctx) {
+      let width = 0;
+      let height = 0;
+      let particles = [];
+      let frameId;
+      const symbols = ['✦', '✧', '·'];
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    class Particle {
-      constructor() {
-        this.reset();
+      function resizeCanvas() {
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.round(width * pixelRatio);
+        canvas.height = Math.round(height * pixelRatio);
+        ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        particles = Array.from({ length: Math.min(34, Math.ceil(width / 38)) }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size: Math.random() * 12 + 7,
+          speed: Math.random() * 0.18 + 0.05,
+          phase: Math.random() * Math.PI * 2,
+          symbol: symbols[Math.floor(Math.random() * symbols.length)]
+        }));
       }
 
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 12 + 6;
-        this.speedY = -(Math.random() * 0.4 + 0.1);
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.opacity = Math.random() * 0.6 + 0.2;
-        this.fadeSpeed = Math.random() * 0.005 + 0.002;
-        this.symbol = Math.random() > 0.4 ? '✨' : (Math.random() > 0.5 ? '⭐' : '🪄');
-      }
-
-      update() {
-        this.y += this.speedY;
-        this.x += this.speedX;
-        this.opacity -= this.fadeSpeed;
-
-        if (this.y < -20 || this.opacity <= 0) {
-          this.reset();
-          this.y = canvas.height + 10;
-        }
-      }
-
-      draw() {
-        ctx.save();
-        ctx.globalAlpha = this.opacity;
-        ctx.font = `${this.size}px sans-serif`;
-        ctx.fillText(this.symbol, this.x, this.y);
-        ctx.restore();
-      }
-    }
-
-    function initParticles() {
-      particles = [];
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
-    }
-
-    function animateParticles() {
-      if (prefersReducedMotion) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animateParticles);
-    }
-
-    initParticles();
-    if (!prefersReducedMotion) {
-      animateParticles();
-    }
-  }
-
-  // 2. Scroll Reveal Fade-up
-  const revealElements = document.querySelectorAll('.reveal');
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -50px 0px',
-    threshold: 0.15
-  };
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  revealElements.forEach(el => observer.observe(el));
-
-  // 3. Interactive Polaroid Custom Image Upload Handler
-  const polaroidFrames = document.querySelectorAll('.polaroid-frame');
-  polaroidFrames.forEach(frame => {
-    const fileInput = frame.querySelector('.polaroid-file-input');
-    const imgWrapper = frame.querySelector('.polaroid-img-wrapper img');
-
-    if (fileInput && imgWrapper) {
-      frame.addEventListener('click', () => {
-        fileInput.click();
-      });
-
-      fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            imgWrapper.src = event.target.result;
-          };
-          reader.readAsDataURL(file);
-        }
-      });
-    }
-  });
-
-  // 4. 3D Tilt Effect on Gallery Cards
-  const tiltCards = document.querySelectorAll('.tilt-card');
-  tiltCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = ((y - centerY) / centerY) * -10; // max 10 deg rotation
-      const rotateY = ((x - centerX) / centerX) * 10;
-
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-    });
-  });
-
-  // 5. Celebrate Button Confetti
-  const btn = document.getElementById('celebrateBtn');
-  if (btn) {
-    btn.addEventListener('click', () => {
-      if (window.confetti) {
-        confetti({
-          particleCount: 200,
-          spread: 90,
-          origin: { y: 0.6 },
-          colors: ['#FF69B4', '#FF00FF', '#FFD700', '#DAA520', '#FFFFFF']
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach((particle) => {
+          particle.y -= particle.speed;
+          particle.phase += 0.013;
+          if (particle.y < -20) {
+            particle.y = height + 12;
+            particle.x = Math.random() * width;
+          }
+          ctx.globalAlpha = 0.14 + (Math.sin(particle.phase) + 1) * 0.11;
+          ctx.fillStyle = '#9b718f';
+          ctx.font = `${particle.size}px Georgia, serif`;
+          ctx.fillText(particle.symbol, particle.x, particle.y);
         });
+        ctx.globalAlpha = 1;
+        frameId = window.requestAnimationFrame(animate);
+      }
+
+      resizeCanvas();
+      frameId = window.requestAnimationFrame(animate);
+      window.addEventListener('resize', resizeCanvas, { passive: true });
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          window.cancelAnimationFrame(frameId);
+        } else {
+          window.cancelAnimationFrame(frameId);
+          frameId = window.requestAnimationFrame(animate);
+        }
+      });
+    }
+  }
+
+  // Reveal sections as they enter the viewport, with a no-JS-friendly fallback.
+  const revealElements = document.querySelectorAll('.reveal');
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('reveal-ready');
+    const observer = new IntersectionObserver((entries, activeObserver) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          activeObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -45px 0px', threshold: 0.08 });
+
+    revealElements.forEach((element) => observer.observe(element));
+  } else {
+    revealElements.forEach((element) => element.classList.add('active'));
+  }
+
+  // Add a small 3D paper tilt only on mouse/trackpad devices.
+  if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+    document.querySelectorAll('.tilt-card').forEach((card) => {
+      card.addEventListener('pointermove', (event) => {
+        const bounds = card.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+        const baseAngle = getComputedStyle(card).getPropertyValue('--tilt').trim() || '0deg';
+        card.style.transform = `perspective(900px) rotateX(${-y * 6}deg) rotateY(${x * 7}deg) rotate(${baseAngle}) scale(1.015)`;
+      });
+
+      card.addEventListener('pointerleave', () => {
+        const baseAngle = getComputedStyle(card).getPropertyValue('--tilt').trim() || '0deg';
+        card.style.transform = `rotate(${baseAngle})`;
+      });
+    });
+  }
+
+  // Sticker files are kept in /stickers; add each filename and caption here.
+  // Transparent WebP and PNG files keep their original sticker edges.
+  const STICKERS = [];
+  const stickerSection = document.getElementById('stickers');
+  const stickerNavLink = document.getElementById('stickers-nav-link');
+  const stickerGrid = document.getElementById('sticker-grid');
+  const lightbox = document.getElementById('sticker-lightbox');
+  const lightboxImage = document.getElementById('lightbox-image');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const closeLightbox = document.getElementById('lightbox-close');
+
+  function openImagePreview(src, alt, caption) {
+    if (!lightbox || !lightboxImage || !lightboxCaption) return;
+    lightboxImage.src = src;
+    lightboxImage.alt = alt;
+    lightboxCaption.textContent = caption;
+    if (typeof lightbox.showModal === 'function') lightbox.showModal();
+    else lightbox.setAttribute('open', '');
+  }
+
+  const reelImageButton = document.getElementById('reel-image-expand');
+  if (reelImageButton) {
+    const reelImage = reelImageButton.querySelector('img');
+    reelImageButton.addEventListener('click', () => {
+      if (reelImage) openImagePreview(reelImage.src, reelImage.alt, 'Woh reel, jisse yeh idea aaya ♡');
+    });
+  }
+
+  if (stickerSection && stickerGrid && STICKERS.length) {
+    STICKERS.forEach((sticker, index) => {
+      const button = document.createElement('button');
+      button.className = 'sticker-card';
+      button.type = 'button';
+      button.setAttribute('aria-label', `View sticker: ${sticker.caption || `Reaction ${index + 1}`}`);
+
+      const art = document.createElement('span');
+      art.className = 'sticker-art';
+      const image = document.createElement('img');
+      image.src = sticker.src;
+      image.alt = sticker.caption ? `${sticker.caption} WhatsApp sticker` : `Shovita WhatsApp sticker ${index + 1}`;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      art.append(image);
+
+      const caption = document.createElement('span');
+      caption.className = 'sticker-caption';
+      caption.textContent = sticker.caption || `Reaction ${String(index + 1).padStart(2, '0')}`;
+      button.append(art, caption);
+      button.addEventListener('click', () => {
+        openImagePreview(sticker.src, image.alt, caption.textContent);
+      });
+      stickerGrid.append(button);
+    });
+
+    stickerSection.hidden = false;
+    if (stickerNavLink) stickerNavLink.hidden = false;
+    revealElements.forEach((element) => {
+      if (element === stickerSection && document.documentElement.classList.contains('reveal-ready')) {
+        // The section starts hidden; observe it after its sticker cards are ready.
+        const revealObserver = new IntersectionObserver((entries, activeObserver) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+              activeObserver.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -45px 0px', threshold: 0.08 });
+        revealObserver.observe(stickerSection);
       }
     });
   }
 
-  // 6. Blow Candle Interaction
+  if (closeLightbox && lightbox) {
+    closeLightbox.addEventListener('click', () => lightbox.close ? lightbox.close() : lightbox.removeAttribute('open'));
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) lightbox.close ? lightbox.close() : lightbox.removeAttribute('open');
+    });
+  }
+
+  // Birthday confetti and the candle wish moment.
+  const confettiColors = ['#b94f72', '#e8c0c7', '#cdbbe0', '#f0cb72', '#fffdfa'];
+  const celebrateButton = document.getElementById('celebrateBtn');
+  if (celebrateButton) {
+    celebrateButton.addEventListener('click', () => {
+      if (window.confetti) {
+        window.confetti({ particleCount: 125, spread: 78, startVelocity: 34, origin: { y: 0.62 }, colors: confettiColors });
+      }
+    });
+  }
+
   const candle = document.getElementById('candle');
   const flame = document.getElementById('flame');
-  
   if (candle && flame) {
     candle.addEventListener('click', () => {
-      if (!flame.classList.contains('blown-out')) {
-        flame.classList.add('blown-out');
-        
-        // Fire mini confetti burst over the cake
-        if (window.confetti) {
-          const rect = candle.getBoundingClientRect();
-          const x = (rect.left + (rect.width / 2)) / window.innerWidth;
-          const y = (rect.top + (rect.height / 2)) / window.innerHeight;
-          
-          confetti({
-            particleCount: 50,
-            spread: 60,
-            origin: { x: x, y: y },
-            colors: ['#FFD700', '#FFFFFF']
-          });
-        }
+      if (flame.classList.contains('blown-out')) return;
+      flame.classList.add('blown-out');
+      if (window.confetti) {
+        const bounds = candle.getBoundingClientRect();
+        window.confetti({
+          particleCount: 38,
+          spread: 55,
+          startVelocity: 24,
+          origin: { x: (bounds.left + bounds.width / 2) / window.innerWidth, y: bounds.top / window.innerHeight },
+          colors: ['#f0cb72', '#fffdfa', '#e6a8b9']
+        });
       }
     });
   }

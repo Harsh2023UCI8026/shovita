@@ -3,221 +3,203 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Happy Birthday Shovita — Oct 1 Birthday Page with scrapbooking aesthetics and friendship memories.">
-  <title>Happy Birthday Shovita 🎂</title>
+  <meta name="theme-color" content="#fbf5f2">
+  <meta name="description" content="Shovita ke liye ek birthday scrapbook—thodi memories, dosti, aur ek chhota sa tohfa.">
+  <title>Shovita ke liye, with friendship 🎂</title>
 
-  <!-- Google Fonts: Caveat (Headings) & Quicksand (Body & Subheadings) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to the birthday page</a>
+  <canvas id="sparkle-canvas" aria-hidden="true"></canvas>
 
-  <!-- Background Canvas for Sparkles -->
-  <canvas id="sparkle-canvas"></canvas>
+  <header class="site-header">
+    <a class="site-mark" href="#top" aria-label="Back to the top">bas tumhare liye <span>♡</span></a>
+    <nav class="site-nav" aria-label="Page sections">
+      <a href="#reasons">Reasons</a>
+      <a href="#photos">Yaadein</a>
+      <a href="#stickers" id="stickers-nav-link" hidden>Sticker wall</a>
+    </nav>
+  </header>
 
-  <main class="container">
-
-    <!-- Section 1: Hero -->
-    <section class="section hero-section reveal">
-      <div class="hero-content">
-        <!-- 3D CSS Balloons will go here -->
-        <div class="balloons-container">
-          <div class="balloon balloon-1"></div>
-          <div class="balloon balloon-2"></div>
-          <div class="balloon balloon-3"></div>
-        </div>
-        
-        <h1 class="hero-title">Happy Birthday<br/>Shovita 🎂</h1>
-        <div class="hero-date">October 1st 🪄</div>
-        <p class="hero-tagline">To a genuine friend — here’s to celebrating you and all the kindness you bring to the world. ✨</p>
+  <main id="main-content" class="container">
+    <section class="section hero-section reveal" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-sparkle">✳</span> Ek chhota birthday scrapbook, ek khaas dost ke liye</p>
+        <h1 id="hero-title">Happy Birthday,<br><span>Shovita</span> <span class="hero-cake" aria-hidden="true">🎂</span></h1>
+        <p class="hero-date">October 1st — tumhara din <span aria-hidden="true">✦</span></p>
+        <p class="hero-tagline">Thodi favourite memories, ek chhota sa thank-you, aur ek wish ki humari dosti aur close hoti rahe.</p>
+        <a class="button button-primary" href="#reasons">Mere reasons dekho <span aria-hidden="true">↓</span></a>
       </div>
-      <div class="scroll-hint">
-        <span>Scroll down ✨</span>
-        <span class="scroll-hint-icon">↓</span>
+
+      <figure class="hero-photo-card tilt-card">
+        <span class="photo-pin" aria-hidden="true">✳</span>
+        <div class="hero-photo-wrap"><img src="1.jpeg" alt="Shovita smiling on a sunny day" fetchpriority="high"></div>
+        <figcaption>is page ki main character <span aria-hidden="true">♡</span></figcaption>
+        <span class="hero-doodle doodle-star" aria-hidden="true">✦</span>
+        <span class="hero-doodle doodle-heart" aria-hidden="true">♡</span>
+      </figure>
+
+      <a class="scroll-hint" href="#reasons"><span>Aage thoda aur hai</span><span aria-hidden="true">↓</span></a>
+      <div class="hero-balloons" aria-hidden="true"><i></i><i></i><i></i></div>
+    </section>
+
+    <section class="section reasons-section reveal" id="reasons" aria-labelledby="reasons-title">
+      <div class="section-heading">
+        <p class="eyebrow">Yeh page banaane ki chhoti si wajah</p>
+        <h2 id="reasons-title">Reasons I’m friends<br>with you<span class="heading-dots">…</span></h2>
+        <p class="section-intro">Ek nahi, kaafi saare reasons hain. Chalo, kuch yaad karte hain.</p>
+      </div>
+
+      <aside class="reel-note" aria-label="The reel that inspired this page">
+        <div class="reel-copy">
+          <span class="reel-label">the tiny spark behind this page</span>
+          <p>Tumne woh reel like ki thi na, jisme friends birthday pe “reasons why” surprise banate hain? Usse yeh idea aaya—socha, Shovita ke liye bhi apni memories aur apne words ke saath kuch personal banaun.</p>
+        </div>
+        <figure class="reel-polaroid">
+          <button class="reel-image-button" id="reel-image-expand" type="button" aria-label="Expand the reel screenshot">
+            <img src="like.jpeg" alt="Screenshot of the birthday-friends reel that inspired this scrapbook" loading="lazy">
+            <span class="reel-expand-icon" aria-hidden="true">⤢</span>
+          </button>
+          <figcaption>phir yeh bana ♡</figcaption>
+        </figure>
+        <span class="reel-doodle" aria-hidden="true">↗</span>
+      </aside>
+
+      <div class="reason-grid">
+        <article class="reason-card reason-rose">
+          <span class="reason-number">01</span><span class="reason-icon" aria-hidden="true">🫶</span>
+          <h3>Tum hamesha show up karti ho.</h3>
+          <p>OA wale din mera laptop atak gaya tha, aur tum apna laptop leke exam hall aa gayi. Shortlist nahi hua, but tumhara aana main nahi bhoola.</p>
+          <span class="card-scribble" aria-hidden="true">woh baat yaad hai ♡</span>
+        </article>
+        <article class="reason-card reason-lilac">
+          <span class="reason-number">02</span><span class="reason-icon" aria-hidden="true">📞</span>
+          <h3>Help ke liye bas ek call kaafi hai.</h3>
+          <p>East Campus se ID-card ki info chahiye ho ya koi chhoti help—tum bina fuss ke kar deti ho. Tumse poochne mein hesitation nahi hoti.</p>
+          <span class="card-scribble" aria-hidden="true">bas ek call away ✨</span>
+        </article>
+        <article class="reason-card reason-yellow">
+          <span class="reason-number">03</span><span class="reason-icon" aria-hidden="true">💛</span>
+          <h3>Tum bina judge kiye sunti ho.</h3>
+          <p>Canvas chhodne aur placement stress ke time tumne bas meri baat suni. “Ek din toh aaega hi” — woh line ab tak yaad hai.</p>
+          <span class="card-scribble" aria-hidden="true">yeh words yaad rahenge</span>
+        </article>
+        <article class="reason-card reason-green">
+          <span class="reason-number">04</span><span class="reason-icon" aria-hidden="true">🌿</span>
+          <h3>Tum bina extra words ke samajh jaati ho.</h3>
+          <p>Mujhe apni feelings explain karna easy nahi aata. Phir bhi tum samajh jaati ho—tumhare saath thodi aur baat karne ka mann karta hai.</p>
+          <span class="card-scribble" aria-hidden="true">you just get it ♡</span>
+        </article>
+        <article class="reason-card reason-blue">
+          <span class="reason-number">05</span><span class="reason-icon" aria-hidden="true">🎨</span>
+          <h3>Tumhara apna andaaz hi special hai.</h3>
+          <p>Fine arts, events, biotech, Gurgaon se daily commute—har cheez mein dil lagati ho, aur phir bhi grounded rehti ho.</p>
+          <span class="card-scribble" aria-hidden="true">very Shovita energy</span>
+        </article>
+        <article class="reason-card reason-peach">
+          <span class="reason-number">06</span><span class="reason-icon" aria-hidden="true">☀️</span>
+          <h3>Tumse baat karna genuinely achha lagta hai.</h3>
+          <p>Alag campuses, kam catch-ups—phir bhi har conversation easy aur achhi lagti hai. Aisi aur baatein karne ka mann hai.</p>
+          <span class="card-scribble" aria-hidden="true">thodi aur yaadein? ✨</span>
+        </article>
       </div>
     </section>
 
-    <!-- Section 2: About Shovita -->
-    <section class="section facts-section reveal">
-      <h2>About Shovita 🎨</h2>
-      <div class="facts-grid">
-        
-        <div class="fact-card brush-card">
-          <div class="fact-icon"><i class="fas fa-paint-brush"></i></div>
-          <h3>Fine Arts Head</h3>
-          <p>Leading the way in Canvas Society & Moksha with immense talent.</p>
-        </div>
-
-        <div class="fact-card brush-card-alt">
-          <div class="fact-icon"><i class="fas fa-calendar-check"></i></div>
-          <h3>Event Maestro</h3>
-          <p>An incredible artist combined with top-tier event management skills.</p>
-        </div>
-
-        <div class="fact-card brush-card-gold">
-          <div class="fact-icon"><i class="fas fa-dna"></i></div>
-          <h3>Biotech Genius</h3>
-          <p>A brilliant mind excelling in biotechnology.</p>
-        </div>
-
-        <div class="fact-card brush-card-alt">
-          <div class="fact-icon"><i class="fas fa-leaf"></i></div>
-          <h3>Principled & Grounded</h3>
-          <p>One of the few in Canvas Society who doesn't drink or smoke like me. True to her roots.</p>
-        </div>
-
-        <div class="fact-card brush-card">
-          <div class="fact-icon"><i class="fas fa-subway"></i></div>
-          <h3>Dedication Personified</h3>
-          <p>Commuted daily from Gurgaon to main campus, finally got a flat near college in 4th year!</p>
-        </div>
-
+    <section class="section gallery-section reveal" id="photos" aria-labelledby="gallery-title">
+      <div class="section-heading">
+        <p class="eyebrow">Chhote frames, achhi yaadein</p>
+        <h2 id="gallery-title">Thodi photos, bahut si yaadein <span class="heading-dots">♡</span></h2>
+        <p class="section-intro">Album chhota sa hai; memories abhi aur banani hain.</p>
       </div>
-    </section>
-
-    <!-- Section 3: Our Story -->
-    <section class="section story-section reveal">
-      <h2>Our Story 📖</h2>
-      <div class="timeline">
-        
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>First Meeting</h3>
-            <p>We first met when you came to see Moksha's fine arts work in Canvas Society during our first year. Little did I know how helpful you'd turn out to be.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>Different Campuses, Same Respect</h3>
-            <p>Even though we're from different campuses (me from East Campus, you from Main Campus) and didn't interact constantly, every single conversation has been respectful, kind, and positive.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>The OA Incident</h3>
-            <p>I was giving an OA at main campus and my laptop bugged out. I panicked and called several people who didn't pick up. You picked up immediately and rushed to the exam hall to give me your laptop. I didn't get shortlisted, but the gesture mattered so much that I had to thank you with a chocolate. 🍫</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>Always Reliable</h3>
-            <p>Whenever I needed any small help from main campus (like ID card info) while sitting at East Campus, one call to you and the help was instant, with absolutely no hesitation.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>Genuine Moral Support</h3>
-            <p>When I left Canvas Society due to placement pressure, I was feeling incredibly low and even cried. I told you about it, expecting judgment, but instead, you listened. You told me not to be demotivated, that this was just a phase, and reminded me that the society was meant to be a stress relief. You said, <em>"Ek din toh aaega hi"</em>. I admitted I was bad at expressing my feelings and really only talked to you in the society. You understood my nature completely. That genuine support is something I'll never forget. ❤️</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Section 4: Photo Gallery (3D Tilt Cards) -->
-    <section class="section gallery-section reveal">
-      <h2>Gallery of Moments ✨</h2>
       <div class="gallery-grid">
-        
-        <div class="polaroid-frame tilt-card">
-          <div class="washi-tape"></div>
-          <div class="polaroid-img-wrapper">
-            <img src="1.jpeg" alt="Shovita Photo 1">
-          </div>
-          <div class="polaroid-caption">Memory 1 ✨</div>
-        </div>
-
-        <div class="polaroid-frame tilt-card">
-          <div class="washi-tape tape-alt"></div>
-          <div class="polaroid-img-wrapper">
-            <img src="2.jpeg" alt="Shovita Photo 2">
-          </div>
-          <div class="polaroid-caption">Memory 2 ⭐</div>
-        </div>
-
-        <div class="polaroid-frame tilt-card">
-          <div class="washi-tape tape-gold"></div>
-          <div class="polaroid-img-wrapper">
-            <img src="3.jpeg" alt="Shovita Photo 3">
-          </div>
-          <div class="polaroid-caption">Memory 3 🎨</div>
-        </div>
-
-        <div class="polaroid-frame tilt-card">
-          <div class="washi-tape"></div>
-          <div class="polaroid-img-wrapper">
-            <img src="4.jpeg" alt="Shovita Photo 4">
-          </div>
-          <div class="polaroid-caption">Memory 4 🪄</div>
-        </div>
-
+        <figure class="polaroid tilt-card">
+          <span class="washi-tape tape-rose" aria-hidden="true"></span>
+          <div class="polaroid-img"><img src="1.jpeg" alt="Shovita smiling by a brick wall" loading="lazy"></div>
+          <figcaption>tumhari favourite smile ✨</figcaption>
+        </figure>
+        <figure class="polaroid tilt-card">
+          <span class="washi-tape tape-lilac" aria-hidden="true"></span>
+          <div class="polaroid-img"><img src="2.jpeg" alt="A favourite memory with Shovita" loading="lazy"></div>
+          <figcaption>yaadon ke naam ♡</figcaption>
+        </figure>
+        <figure class="polaroid tilt-card">
+          <span class="washi-tape tape-yellow" aria-hidden="true"></span>
+          <div class="polaroid-img"><img src="3.jpeg" alt="A favourite memory with Shovita" loading="lazy"></div>
+          <figcaption>artist wali vibe ✦</figcaption>
+        </figure>
+        <figure class="polaroid tilt-card">
+          <span class="washi-tape tape-green" aria-hidden="true"></span>
+          <div class="polaroid-img"><img src="4.jpeg" alt="A favourite memory with Shovita" loading="lazy"></div>
+          <figcaption>aur moments aayenge ♡</figcaption>
+        </figure>
       </div>
     </section>
 
-    <!-- Section 5: Video Gift -->
-    <section class="section video-section reveal">
-      <h2>Ek chhota sa tohfa 🎁</h2>
-      <div class="video-container">
-        <video id="gift-video" controls poster="1.jpeg">
+    <section class="section sticker-section reveal" id="stickers" aria-labelledby="stickers-title" hidden>
+      <div class="section-heading">
+        <p class="eyebrow">Bilkul official Shovita reaction pack</p>
+        <h2 id="stickers-title">Tumhare iconic stickers <span aria-hidden="true">😂</span></h2>
+        <p class="section-intro">Har mood ke liye ek Shovita sticker toh banta hai.</p>
+      </div>
+      <div class="sticker-grid" id="sticker-grid"></div>
+    </section>
+
+    <section class="section video-section reveal" id="gift" aria-labelledby="gift-title">
+      <div class="section-heading">
+        <p class="eyebrow">Ek chhoti si cheez, sirf tumhare liye</p>
+        <h2 id="gift-title">Ek chhota sa tohfa <span aria-hidden="true">🎁</span></h2>
+        <p class="section-intro">Jab mann ho play karna—yeh tumhare liye banaya hai.</p>
+      </div>
+      <div class="video-frame">
+        <span class="video-sparkle video-sparkle-one" aria-hidden="true">✦</span>
+        <span class="video-sparkle video-sparkle-two" aria-hidden="true">♡</span>
+        <video id="gift-video" controls playsinline preload="metadata" poster="gift-poster.svg">
           <source src="video.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
+      <p class="video-caption">Ek dost ki taraf se, ek khaas dost ke liye <span aria-hidden="true">💌</span></p>
     </section>
 
-    <!-- Section 6: Closing Message -->
-    <section class="section note-section reveal">
-      <div class="note-container">
-        <div class="washi-tape tape-gold"></div>
-        <div class="note-content">
-          <p>Shovita, thank you for being such a supportive, kind, and genuine friend. From rushing to help me during exams, to being a pillar of support when I was stressed, your friendship has meant a lot to me.</p>
-          <br>
-          <p>Wishing you the happiest of birthdays! May you achieve all your artistic and professional goals. Stay awesome, stay creative, and stay exactly as grounded as you are. ✨</p>
+    <section class="section note-section reveal" id="note" aria-labelledby="note-title">
+      <article class="letter-card">
+        <span class="letter-kicker">jaane se pehle, ek baat…</span>
+        <h2 id="note-title">Tumhare naam ek note</h2>
+        <div class="letter-copy">
+          <p>Shovita, tumhara kind aur grounded rehna, bina fuss ke help karna, aur meri baat dhyaan se sunna—yeh sab main genuinely value karta hoon. Tumse baat karna hamesha achha lagta hai.</p>
+          <p>Aage bhi aur baatein aur memories share karne ka mann hai—and humari dosti ko naturally thoda aur close hote dekhna chahta hoon. Happy Birthday! Tum jo bhi create karna chahti ho, iss saal uske aur kareeb jao. ✨</p>
         </div>
-        <div class="note-signature">— Harsh</div>
-      </div>
+        <p class="note-signature">— Harsh <span aria-hidden="true">♡</span></p>
+        <span class="letter-stamp" aria-hidden="true">made<br>with care</span>
+      </article>
     </section>
-
   </main>
 
-  <!-- Footer -->
-  <footer class="footer reveal">
+  <footer class="site-footer reveal">
     <div class="cake-container">
-      <div class="cake-3d" id="birthday-cake">
-        <div class="cake-tier top-tier"></div>
-        <div class="cake-tier bottom-tier"></div>
-        <div class="candle" id="candle">
-          <div class="flame" id="flame"></div>
-        </div>
+      <div class="cake-3d" aria-hidden="true">
+        <div class="cake-tier top-tier"></div><div class="cake-tier bottom-tier"></div>
+        <div class="candle-stick"><span class="flame" id="flame"></span></div>
       </div>
-      <p class="cake-hint">Tap the candle to blow it out! 🌬️</p>
+      <button class="cake-hint" id="candle" type="button" aria-label="Blow out the birthday candle">Candle tap karo, wish maango <span aria-hidden="true">🌬️</span></button>
     </div>
-
     <div class="insta-links">
-      <a href="https://instagram.com/its.shovi" target="_blank" class="insta-btn">@its.shovi</a>
-      <a href="https://instagram.com/shovita_01" target="_blank" class="insta-btn">@shovita_01</a>
+      <a class="insta-btn" href="https://instagram.com/its.shovi" target="_blank" rel="noopener noreferrer">@its.shovi <span aria-hidden="true">↗</span></a>
+      <a class="insta-btn" href="https://instagram.com/shovita_01" target="_blank" rel="noopener noreferrer">@shovita_01 <span aria-hidden="true">↗</span></a>
     </div>
-
-    <button id="celebrateBtn" class="celebrate-btn" aria-label="Celebrate!">Celebrate 🎉</button>
-
-    <div class="footer-divider">
-      <span class="footer-dots">✨ ⭐ 🪄 ⭐ ✨</span>
-    </div>
-    <div class="footer-text">Made with gratitude & friendship</div>
+    <button id="celebrateBtn" class="celebrate-btn" type="button">Party mode on <span aria-hidden="true">🎉</span></button>
+    <p class="footer-signoff">Thodi gratitude, dher saari achhi memories & friendship <span aria-hidden="true">♡</span></p>
   </footer>
+
+  <dialog class="sticker-lightbox" id="sticker-lightbox" aria-label="Image preview">
+    <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close image preview">×</button>
+    <img id="lightbox-image" src="" alt="">
+    <p id="lightbox-caption"></p>
+  </dialog>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.0/dist/confetti.browser.min.js"></script>
   <script src="js/script.js"></script>
