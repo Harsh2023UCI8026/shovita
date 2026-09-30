@@ -40,7 +40,7 @@ img { display: block; max-width: 100%; }
 #sparkle-canvas { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
 .skip-link { position: fixed; z-index: 20; top: 8px; left: 8px; padding: 9px 14px; transform: translateY(-150%); border-radius: 12px; color: #fff; background: var(--ink); }
 .skip-link:focus { transform: translateY(0); }
-.site-header, .container, .site-footer { position: relative; z-index: 1; }
+.site-header, .container { position: relative; z-index: 1; }
 .site-header { width: min(1120px, calc(100% - 48px)); min-height: 72px; margin: 10px auto 0; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .site-mark { font-family: var(--display); font-size: 1.55rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
 .site-mark span { color: var(--rose); }
@@ -48,7 +48,7 @@ img { display: block; max-width: 100%; }
 .site-nav a { color: var(--ink-soft); font-size: .86rem; font-weight: 700; text-decoration: none; transition: color .2s ease; }
 .site-nav a:hover { color: var(--rose); }
 .container { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
-.section { position: relative; padding: clamp(68px, 10vw, 120px) 0; text-align: center; }
+.section { position: relative; padding: clamp(52px, 6.5vw, 78px) 0; text-align: center; }
 .section + .section { border-top: 1px solid var(--line); }
 
 /* Reveal only when JavaScript is available; the full page stays readable otherwise. */
@@ -99,7 +99,7 @@ p { color: var(--ink-soft); }
 .hero-balloons i:nth-child(3) { right: 7px; background: #e8c0c7; animation-delay: .1s; }
 
 /* Reasons: scrapbook notes in place of a generic about section. */
-.reasons-section { padding-top: clamp(75px, 10vw, 115px); }
+.reasons-section { padding-top: clamp(52px, 6.5vw, 78px); }
 .reason-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; text-align: left; }
 .reason-card { position: relative; min-height: 275px; padding: 29px 25px 48px; overflow: hidden; border: 1px solid rgba(83, 53, 76, .07); border-radius: var(--radius-card); background: #fffdfa; box-shadow: 0 10px 28px rgba(70, 48, 65, .07); transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
 .reason-card:hover { transform: translateY(-7px) rotate(-.4deg); box-shadow: var(--shadow); }
@@ -181,29 +181,10 @@ p { color: var(--ink-soft); }
 .note-signature { margin: 26px 0 0; color: var(--rose); font-family: var(--display); font-size: 2.1rem; font-weight: 700; text-align: right; }
 .letter-stamp { position: absolute; top: 24px; right: 25px; display: grid; width: 65px; height: 65px; place-content: center; border: 1px dashed rgba(168, 80, 112, .62); border-radius: 50%; color: var(--rose-deep); font-family: var(--display); font-size: .87rem; font-weight: 700; line-height: 1.05; text-align: center; transform: rotate(9deg); }
 
-/* Small interactive birthday cake and footer */
-.site-footer { padding: 40px 24px 34px; text-align: center; }
-.cake-container { margin: 0 auto 31px; }
-.cake-3d { position: relative; width: 116px; height: 93px; margin: 0 auto; }
-.cake-tier { position: absolute; left: 50%; border-radius: 50%; box-shadow: inset 0 -8px 12px rgba(142, 64, 99, .13), 0 7px 11px rgba(60, 39, 55, .13); transform: translateX(-50%); }
-.bottom-tier { bottom: 1px; width: 112px; height: 44px; background: linear-gradient(115deg, #e4a8b9, #c86f8e); }
-.top-tier { z-index: 2; bottom: 26px; width: 74px; height: 34px; background: linear-gradient(115deg, #fffdfa, #f1d8df); }
-.candle-stick { position: absolute; z-index: 3; bottom: 52px; left: calc(50% - 4px); width: 8px; height: 29px; border-radius: 3px 3px 0 0; background: repeating-linear-gradient(45deg, #fffdfa 0 4px, #c85f83 4px 8px); }
-.flame { position: absolute; top: -18px; left: -3px; width: 14px; height: 19px; border-radius: 55% 45% 52% 48%; background: #f4c84e; box-shadow: 0 0 16px #f4c84e, 0 0 29px rgba(236, 135, 55, .57); animation: flicker .55s ease-in-out infinite alternate; transition: opacity .25s, transform .25s; }
-.flame.blown-out { opacity: 0; transform: translateY(-7px) scale(.4); }
-.cake-hint { padding: 0; border: 0; color: var(--ink-soft); background: transparent; cursor: pointer; font-size: .86rem; font-weight: 700; }
-.cake-hint:hover { color: var(--rose); }
-.insta-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 11px; margin: 0 auto 24px; }
-.insta-btn { padding: 8px 15px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-soft); background: rgba(255, 253, 250, .72); font-size: .82rem; font-weight: 700; text-decoration: none; transition: transform .2s ease, color .2s ease, border-color .2s ease; }
-.insta-btn:hover { transform: translateY(-2px); border-color: rgba(185, 79, 114, .45); color: var(--rose-deep); }
-.celebrate-btn { padding: 12px 20px; border: 0; border-radius: 999px; color: #fff; background: var(--rose); box-shadow: 0 8px 20px rgba(167, 65, 101, .2); cursor: pointer; font-weight: 700; transition: transform .2s ease, background .2s ease; }
-.celebrate-btn:hover { transform: translateY(-3px); background: var(--rose-deep); }
-.footer-signoff { margin: 26px 0 0; color: var(--ink-soft); font-family: var(--display); font-size: 1.25rem; font-weight: 600; }
-.footer-signoff span { color: var(--rose); }
+.note-section { padding-bottom: clamp(26px, 4vw, 46px); }
 
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 @keyframes float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
-@keyframes flicker { from { transform: scale(.94) rotate(-3deg); } to { transform: scale(1.06) rotate(3deg); } }
 
 @media (max-width: 900px) {
   .reason-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -219,8 +200,9 @@ p { color: var(--ink-soft); }
   .site-nav::-webkit-scrollbar { display: none; }
   .site-nav a { min-height: 42px; display: inline-flex; align-items: center; font-size: .77rem; }
   .container { width: min(100% - 34px, 1120px); }
-  .section { padding: 58px 0; }
-  .hero-section { min-height: unset; grid-template-columns: 1fr; gap: 27px; padding-top: 48px; padding-bottom: 82px; text-align: center; }
+  .section { padding: 46px 0; }
+  .hero-section { min-height: unset; grid-template-columns: 1fr; gap: 27px; padding-top: 42px; padding-bottom: 64px; text-align: center; }
+  .reasons-section { padding-top: 46px; }
   .hero-copy .eyebrow { margin-bottom: 16px; }
   h1 { font-size: clamp(3.45rem, 15vw, 4.55rem); }
   #reasons-title { max-width: 520px; font-size: clamp(2.3rem, 9.7vw, 3.1rem); line-height: 1.06; }

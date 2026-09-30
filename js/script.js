@@ -184,33 +184,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Birthday confetti and the candle wish moment.
-  const confettiColors = ['#b94f72', '#e8c0c7', '#cdbbe0', '#f0cb72', '#fffdfa'];
-  const celebrateButton = document.getElementById('celebrateBtn');
-  if (celebrateButton) {
-    celebrateButton.addEventListener('click', () => {
-      if (window.confetti) {
-        window.confetti({ particleCount: 125, spread: 78, startVelocity: 34, origin: { y: 0.62 }, colors: confettiColors });
-      }
-    });
-  }
-
-  const candle = document.getElementById('candle');
-  const flame = document.getElementById('flame');
-  if (candle && flame) {
-    candle.addEventListener('click', () => {
-      if (flame.classList.contains('blown-out')) return;
-      flame.classList.add('blown-out');
-      if (window.confetti) {
-        const bounds = candle.getBoundingClientRect();
-        window.confetti({
-          particleCount: 38,
-          spread: 55,
-          startVelocity: 24,
-          origin: { x: (bounds.left + bounds.width / 2) / window.innerWidth, y: bounds.top / window.innerHeight },
-          colors: ['#f0cb72', '#fffdfa', '#e6a8b9']
-        });
-      }
-    });
-  }
 });
