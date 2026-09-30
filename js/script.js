@@ -98,8 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Sticker files are kept in /stickers; add each filename and caption here.
-  // Transparent WebP and PNG files keep their original sticker edges.
-  const STICKERS = [];
+  // Plain artwork backgrounds keep transparent WebP sticker edges clear.
+  const STICKERS = [
+    { src: 'stickers/shovi-happy-birthday.webp', caption: 'Birthday mode: Shinchan edition 🎂' },
+    { src: 'stickers/shovi-reaction-chat-1.webp', caption: 'Yeh sawaal unexpected tha 😅' },
+    { src: 'stickers/shovi-reaction-chat-2.webp', caption: 'Context samajhne mein glitch ho gaya 😅' },
+    { src: 'stickers/shovi-reaction-chat-3.webp', caption: 'Thoda context miss ho gaya 😄' },
+    { src: 'stickers/shovi-ok-ji.webp', caption: 'Okay ji, noted 😄' },
+    { src: 'stickers/shovi-velle-log.webp', caption: 'Velle log spotted 😂' },
+    { src: 'stickers/shovi-thumbs-up.webp', caption: 'Approved with a thumbs-up 👍' }
+  ];
   const stickerSection = document.getElementById('stickers');
   const stickerNavLink = document.getElementById('stickers-nav-link');
   const stickerGrid = document.getElementById('sticker-grid');
