@@ -184,4 +184,73 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Keep the birthday song behind the page, and duck it while the gift video plays.
+  const birthdaySong = document.getElementById('birthday-song');
+  const musicToggle = document.getElementById('music-toggle');
+  const giftVideo = document.getElementById('gift-video');
+
+  if (birthdaySong && musicToggle) {
+    let musicEnabled = false;
+    let songReady = false;
+
+    function setMusicLabel(label) {
+      musicToggle.textContent = label;
+    }
+
+    function playSong() {
+      if (!musicEnabled || !songReady || (giftVideo && !giftVideo.paused && !giftVideo.ended)) return;
+      birthdaySong.play().then(() => {
+        setMusicLabel('Birthday song band karo ♫');
+      }).catch(() => {
+        setMusicLabel('Birthday song chalao ♫');
+      });
+    }
+
+    birthdaySong.addEventListener('canplay', () => {
+      songReady = true;
+      musicToggle.hidden = false;
+    }, { once: true });
+
+    birthdaySong.addEventListener('error', () => {
+      songReady = false;
+      musicToggle.hidden = true;
+    });
+
+    musicToggle.addEventListener('click', () => {
+      if (musicEnabled && birthdaySong.paused && (!giftVideo || giftVideo.paused || giftVideo.ended)) {
+        playSong();
+        return;
+      }
+
+      if (musicEnabled) {
+        musicEnabled = false;
+        birthdaySong.pause();
+        setMusicLabel('Birthday song chalao ♫');
+        musicToggle.setAttribute('aria-pressed', 'false');
+        return;
+      }
+
+      musicEnabled = true;
+      musicToggle.setAttribute('aria-pressed', 'true');
+      if (giftVideo && !giftVideo.paused && !giftVideo.ended) {
+        setMusicLabel('Video ke baad song chalu hoga ♫');
+      } else {
+        playSong();
+      }
+    });
+
+    if (giftVideo) {
+      giftVideo.addEventListener('play', () => {
+        if (!birthdaySong.paused) birthdaySong.pause();
+        if (musicEnabled) setMusicLabel('Video ke baad song chalu hoga ♫');
+      });
+      giftVideo.addEventListener('pause', playSong);
+      giftVideo.addEventListener('ended', playSong);
+    }
+
+    birthdaySong.addEventListener('pause', () => {
+      if (!musicEnabled) setMusicLabel('Birthday song chalao ♫');
+    });
+  }
+
 });
